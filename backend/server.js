@@ -7,12 +7,14 @@ require('dotenv').config();
 const admin = require('firebase-admin');
 
 // Initialize Firebase
-const serviceAccount = require('serviceAccountKey.json');
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT
+    ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+    : require('./serviceAccountKey.json'); // Nhớ giữ lại dấu ./ ở đây để chạy được ở máy cá nhân
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
+    credential: admin.credential.cert(serviceAccount)
 });
+
 
 const db = admin.firestore();
 
