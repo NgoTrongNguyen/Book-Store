@@ -3,6 +3,19 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+// Firebase Admin SDK
+const admin = require('firebase-admin');
+
+// Initialize Firebase
+const serviceAccount = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
+});
+
+const db = admin.firestore();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,11 +24,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ========== IN-MEMORY DATABASE ==========
-// Trong production, sử dụng database thực (MongoDB, PostgreSQL, etc.)
-
-let preorders = [];
-let reviews = [
+// ========== IN-MEMORY DATA (for initial setup) ==========
+// Dữ liệu này sẽ được lưu vào Firestore một lần
+const initialReviews = [
     {
         id: 1,
         author: 'Alex Thompson',
@@ -73,19 +84,65 @@ const authorData = {
     ]
 };
 
+// ========== HELPER: Initialize Firebase Collections ==========
+async function initializeCollections() {
+    try {
+        // Check if reviews exist
+        const reviewsSnapshot = await db.collection('reviews').limit(1).get();
+        if (reviewsSnapshot.empty) {
+            console.log('📝 Initializing reviews collection...');
+            for (const review of initialReviews) {
+                await db.collection('reviews').add(review);
+            }
+            console.log('✓ Reviews initialized');
+        }
+
+        // Check if author exists
+        const authorSnapshot = await db.collection('author').doc('info').get();
+        if (!authorSnapshot.exists) {
+            console.log('👤 Initializing author document...');
+            await db.collection('author').doc('info').set(authorData);
+            console.log('✓ Author initialized');
+        }
+
+        // Check if book info exists
+        const bookSnapshot = await db.collection('book').doc('info').get();
+        if (!bookSnapshot.exists) {
+            console.log('📚 Initializing book document...');
+            await db.collection('book').doc('info').set({
+                title: 'The Art of Digital Design',
+                category: 'Design Theory',
+                author: 'Sarah Chen',
+                pages: 384,
+                format: 'Hardcover',
+                releaseDate: '2025-03-01',
+                price: 45.00,
+                description: 'A masterful examination of the principles that define contemporary design practice...'
+            });
+            console.log('✓ Book info initialized');
+        }
+    } catch (error) {
+        console.error('Error initializing collections:', error);
+    }
+}
+
 // ========== API ROUTES ==========
 
 /**
  * Health Check
  */
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK', message: 'Server is running' });
+    res.json({
+        status: 'OK',
+        database: 'Firebase Firestore',
+        message: 'Server is running'
+    });
 });
 
 /**
  * POST /api/preorder - Submit a new preorder
  */
-app.post('/api/preorder', (req, res) => {
+app.post('/api/preorder', async (req, res) => {
     try {
         const { name, email, phone, quantity, address, city, zip, country, requests, updates } = req.body;
 
@@ -108,7 +165,6 @@ app.post('/api/preorder', (req, res) => {
 
         // Create preorder object
         const preorder = {
-            id: preorders.length + 1,
             name,
             email,
             phone,
@@ -118,23 +174,26 @@ app.post('/api/preorder', (req, res) => {
             zip,
             country,
             requests: requests || '',
-            updates,
+            updates: updates || false,
             status: 'pending',
-            createdAt: new Date().toISOString(),
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
             totalPrice: parseFloat(quantity || 1) * 45
         };
 
-        // Save to "database"
-        preorders.push(preorder);
+        // Save to Firestore
+        const docRef = await db.collection('preorders').add(preorder);
 
-        // In production: send email confirmation, save to database, etc.
-        console.log('New preorder:', preorder);
+        console.log('✓ New preorder saved:', docRef.id);
+
+        // In production: send email confirmation using SendGrid, Mailgun, etc.
+        // Example:
+        // await sendConfirmationEmail(email, preorder);
 
         res.status(201).json({
             success: true,
             message: 'Preorder submitted successfully',
             data: {
-                orderId: preorder.id,
+                orderId: docRef.id,
                 email: preorder.email,
                 totalPrice: preorder.totalPrice,
                 estimatedDelivery: 'April 2025'
@@ -153,25 +212,52 @@ app.post('/api/preorder', (req, res) => {
 /**
  * GET /api/preorders - Get all preorders (admin only)
  */
-app.get('/api/preorders', (req, res) => {
-    // In production: check authentication
-    res.json({
-        total: preorders.length,
-        preorders: preorders
-    });
+app.get('/api/preorders', async (req, res) => {
+    try {
+        // In production: check authentication/authorization
+        // const token = req.headers.authorization?.split('Bearer ')[1];
+        // if (!token) return res.status(401).json({ success: false, message: 'Unauthorized' });
+
+        const snapshot = await db.collection('preorders')
+            .orderBy('createdAt', 'desc')
+            .get();
+
+        const preorders = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+            createdAt: doc.data().createdAt?.toDate?.() || new Date()
+        }));
+
+        res.json({
+            total: preorders.length,
+            preorders: preorders
+        });
+
+    } catch (error) {
+        console.error('Error fetching preorders:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
 });
 
 /**
  * GET /api/reviews - Get all reviews
  */
-app.get('/api/reviews', (req, res) => {
+app.get('/api/reviews', async (req, res) => {
     try {
-        // Sort by date descending
-        const sortedReviews = [...reviews].sort((a, b) =>
-            new Date(b.date) - new Date(a.date)
-        );
+        const snapshot = await db.collection('reviews')
+            .orderBy('date', 'desc')
+            .get();
 
-        res.json(sortedReviews);
+        const reviews = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        res.json(reviews);
+
     } catch (error) {
         console.error('Error fetching reviews:', error);
         res.status(500).json({
@@ -184,7 +270,7 @@ app.get('/api/reviews', (req, res) => {
 /**
  * POST /api/reviews - Submit a new review
  */
-app.post('/api/reviews', (req, res) => {
+app.post('/api/reviews', async (req, res) => {
     try {
         const { author, title, text, rating } = req.body;
 
@@ -205,7 +291,6 @@ app.post('/api/reviews', (req, res) => {
 
         // Create review object
         const review = {
-            id: reviews.length + 1,
             author,
             title,
             text,
@@ -213,15 +298,18 @@ app.post('/api/reviews', (req, res) => {
             date: new Date().toISOString()
         };
 
-        // Save to "database"
-        reviews.push(review);
+        // Save to Firestore
+        const docRef = await db.collection('reviews').add(review);
 
-        console.log('New review:', review);
+        console.log('✓ New review saved:', docRef.id);
 
         res.status(201).json({
             success: true,
             message: 'Review submitted successfully',
-            data: review
+            data: {
+                id: docRef.id,
+                ...review
+            }
         });
 
     } catch (error) {
@@ -236,11 +324,21 @@ app.post('/api/reviews', (req, res) => {
 /**
  * GET /api/author - Get author information
  */
-app.get('/api/author', (req, res) => {
+app.get('/api/author', async (req, res) => {
     try {
-        res.json(authorData);
+        const doc = await db.collection('author').doc('info').get();
+
+        if (!doc.exists) {
+            return res.status(404).json({
+                success: false,
+                message: 'Author information not found'
+            });
+        }
+
+        res.json(doc.data());
+
     } catch (error) {
-        console.error('Error fetching author info:', error);
+        console.error('Error fetching author:', error);
         res.status(500).json({
             success: false,
             message: 'Internal server error'
@@ -251,22 +349,30 @@ app.get('/api/author', (req, res) => {
 /**
  * GET /api/book - Get book information
  */
-app.get('/api/book', (req, res) => {
+app.get('/api/book', async (req, res) => {
     try {
-        const bookInfo = {
-            title: 'The Art of Digital Design',
-            category: 'Design Theory',
-            author: 'Sarah Chen',
-            pages: 384,
-            format: 'Hardcover',
-            releaseDate: '2025-03-01',
-            price: 45.00,
-            description: 'A masterful examination of the principles that define contemporary design practice...',
-            totalReviews: reviews.length,
-            averageRating: (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
-        };
+        const bookDoc = await db.collection('book').doc('info').get();
+        const reviewsSnapshot = await db.collection('reviews').get();
 
-        res.json(bookInfo);
+        if (!bookDoc.exists) {
+            return res.status(404).json({
+                success: false,
+                message: 'Book information not found'
+            });
+        }
+
+        const bookInfo = bookDoc.data();
+        const reviews = reviewsSnapshot.docs.map(doc => doc.data());
+        const averageRating = reviews.length > 0
+            ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
+            : 0;
+
+        res.json({
+            ...bookInfo,
+            totalReviews: reviews.length,
+            averageRating: parseFloat(averageRating)
+        });
+
     } catch (error) {
         console.error('Error fetching book info:', error);
         res.status(500).json({
@@ -296,11 +402,15 @@ app.use((err, req, res, next) => {
 });
 
 // ========== START SERVER ==========
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    // Initialize collections on startup
+    await initializeCollections();
+
     console.log(`
     ╔══════════════════════════════════════╗
     ║  Premium Book Preorder API Server    ║
     ║  Server running on port ${PORT}       ║
+    ║  Database: Firebase Firestore        ║
     ║  Environment: ${process.env.NODE_ENV || 'development'}          ║
     ╚══════════════════════════════════════╝
     
@@ -312,4 +422,11 @@ app.listen(PORT, () => {
     ✓ GET    /api/author      - Get author info
     ✓ GET    /api/book        - Get book info
     `);
+});
+
+// ========== GRACEFUL SHUTDOWN ==========
+process.on('SIGINT', async () => {
+    console.log('\n📵 Shutting down gracefully...');
+    await admin.app().delete();
+    process.exit(0);
 });
