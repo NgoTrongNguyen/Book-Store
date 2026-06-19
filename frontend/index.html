@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Book Preorder - The Art of Digital Design</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">PUBLISHER</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-section="overview">Overview</a>
+                <a href="#" class="nav-link" data-section="reviews">Reviews</a>
+                <a href="#" class="nav-link" data-section="author">Author</a>
+            </div>
+        </nav>
+
+        <!-- SECTION: OVERVIEW -->
+        <section id="overview-section" class="section-content active">
+            <div class="main-grid">
+                <!-- Left: Book Visual & Info -->
+                <div class="book-column">
+                    <!-- Book Cover -->
+                    <div class="book-cover">
+                        <div class="cover-shine"></div>
+                        <div class="cover-content">
+                            <div class="cover-category">DESIGN THEORY</div>
+                            <h1 class="cover-title">The Art of Digital Design</h1>
+                            <p class="cover-author">By Sarah Chen</p>
+                        </div>
+                    </div>
+
+                    <!-- Book Metadata -->
+                    <div class="metadata-grid">
+                        <div class="metadata-item">
+                            <div class="metadata-label">Pages</div>
+                            <div class="metadata-value">384</div>
+                        </div>
+                        <div class="metadata-item">
+                            <div class="metadata-label">Format</div>
+                            <div class="metadata-value">Hardcover</div>
+                        </div>
+                        <div class="metadata-item">
+                            <div class="metadata-label">Release</div>
+                            <div class="metadata-value">Mar 2025</div>
+                        </div>
+                        <div class="metadata-item dark">
+                            <div class="metadata-label">Price</div>
+                            <div class="metadata-value">$45.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="description-section">
+                        <h3>About</h3>
+                        <p>
+                            A masterful examination of the principles that define contemporary design practice. From
+                            foundational theory to cutting-edge applications, this comprehensive volume distills decades
+                            of professional experience into actionable insights for designers at every level.
+                        </p>
+                        <p>
+                            Sarah Chen explores the intersection of aesthetics and functionality, presenting case
+                            studies and methodologies that transform vision into intuitive, beautiful digital products.
+                            Essential reading for anyone serious about design.
+                        </p>
+                    </div>
+
+                    <!-- Key Topics -->
+                    <div class="highlights-section">
+                        <h4>Key Topics</h4>
+                        <div class="topics-grid">
+                            <div>Visual hierarchy principles</div>
+                            <div>Accessibility standards</div>
+                            <div>Typography systems</div>
+                            <div>Color theory & practice</div>
+                            <div>User research methods</div>
+                            <div>Design systems at scale</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Pre-order Form -->
+                <div class="form-column">
+                    <div class="form-card">
+                        <h2>Secure your copy</h2>
+                        <p class="form-subtitle">Pre-order now and receive exclusive access to companion materials</p>
+
+                        <form id="preorderForm">
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="name" placeholder="Your full name" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" name="email" placeholder="you@example.com" required>
+                            </div>
+
+                            <!-- Phone & Quantity -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" name="phone" placeholder="+1 (555) 000-0000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <select name="quantity">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>5</option>
+                                        <option>10</option>
+                                        <option>Custom</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Street Address -->
+                            <div class="form-group">
+                                <label>Street Address</label>
+                                <input type="text" name="address" placeholder="123 Main Street" required>
+                            </div>
+
+                            <!-- City & ZIP -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" name="city" placeholder="New York" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>ZIP Code</label>
+                                    <input type="text" name="zip" placeholder="10001" required>
+                                </div>
+                            </div>
+
+                            <!-- Country -->
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select name="country">
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>United Kingdom</option>
+                                    <option>Australia</option>
+                                    <option>Vietnam</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Special Requests -->
+                            <div class="form-group">
+                                <label>Special Requests (Optional)</label>
+                                <textarea name="requests" placeholder="Any specific requests or notes..."
+                                    rows="4"></textarea>
+                            </div>
+
+                            <!-- Checkbox -->
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="updates" name="updates">
+                                <label for="updates">Notify me about related publications and exclusive content</label>
+                            </div>
+
+                            <!-- Summary -->
+                            <div class="order-summary">
+                                <div>
+                                    <div class="subtotal-label">Subtotal</div>
+                                    <div class="subtotal-price">$45<span>.00</span></div>
+                                </div>
+                                <button type="submit" class="btn-submit">Complete Order</button>
+                            </div>
+
+                            <!-- Footer Note -->
+                            <p class="form-footer">Secure payment • Ships April 2025 • Free shipping on orders over $50
+                            </p>
+                        </form>
+
+                        <!-- Status Message -->
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            <div class="success-icon">✓</div>
+                            <div class="success-text">
+                                <h3>Order Confirmed!</h3>
+                                <p>A confirmation email has been sent to your inbox.</p>
+                                <p class="delivery-info">Expected delivery: April 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <section class="testimonials-section">
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p>"A landmark contribution to design literature. Chen's insights are both theoretically
+                            rigorous and immediately applicable to real work."</p>
+                        <div class="testimonial-author">Michael Rivera</div>
+                        <div class="testimonial-title">Design Director, Studio Global</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Required reading for anyone building digital products. This book clarifies the principles
+                            that separate good design from exceptional work."</p>
+                        <div class="testimonial-author">Emma Zhang</div>
+                        <div class="testimonial-title">UX Lead, Innovation Labs</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Chen demonstrates that great design is not accident—it's the product of deliberate
+                            methodology and deep understanding."</p>
+                        <div class="testimonial-author">James Nakamura</div>
+                        <div class="testimonial-title">Executive Editor, Design Quarterly</div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- SECTION: REVIEWS -->
+        <section id="reviews-section" class="section-content">
+            <h2 class="section-title">Reader Reviews</h2>
+            <div id="reviews-container" class="reviews-container">
+                <div class="review-skeleton">Loading reviews...</div>
+            </div>
+        </section>
+
+        <!-- SECTION: AUTHOR -->
+        <section id="author-section" class="section-content">
+            <h2 class="section-title">About the Author</h2>
+            <div id="author-container" class="author-container">
+                <div class="author-skeleton">Loading author information...</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 PUBLISHER. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
