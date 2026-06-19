@@ -1,5 +1,5 @@
 // API URL - Thay đổi theo môi trường
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://book-store-1-oxap.onrender.com/api';
 
 // ========== NAVIGATION ==========
 document.querySelectorAll('.nav-link').forEach(link => {
