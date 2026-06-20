@@ -76,29 +76,32 @@ const authorData = {
         {
             id: 1,
             name: 'ThS. Hồ Viết Đức Lương',
-            title: 'Design Director & Design System Architect',
-            bio: 'hiện giảng dạy tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội và nghiên cứu tại Trung tâm Nghiên cứu quốc tế về Trí tuệ nhân tạo BKAI.Thầy có nhiều công bố khoa học trên các tạp chí và hội nghị hàng đầu trên thế giới trong nhiều lĩnh vực Trí tuệ nhân tạo, Tối ưu hóa và Tin học sức khỏe.Thầy là tác giả của nhiều đầu sách cho học sinh THCS, điển hình là bộ “Định hướng, Trau dồi, Chinh phục Toán THCS”',
+            title: 'Tác giả chính',
+            bio: 'hiện giảng dạy tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội và nghiên cứu tại Trung tâm Nghiên cứu quốc tế về Trí tuệ nhân tạo BKAI. Thầy có nhiều công bố khoa học trên các tạp chí và hội nghị hàng đầu trên thế giới trong nhiều lĩnh vực Trí tuệ nhân tạo, Tối ưu hóa và Tin học sức khỏe. Thầy là tác giả của nhiều đầu sách cho học sinh THCS, điển hình là bộ "Định hướng, Trau dồi, Chinh phục Toán THCS"',
             achievements: [
-                'Led design teams at three major tech companies',
-                'Speaker at 20+ international design conferences',
-                'Published numerous articles on design theory',
-                'Mentored 100+ designers throughout her career'
+                'Giảng dạy tại Bách khoa Hà Nội',
+                'Nghiên cứu tại BKAI',
+                'Công bố khoa học tại các tạp chí hàng đầu thế giới',
+                'Chuyên gia về AI, Tối ưu hóa và Tin học sức khỏe',
+                'Tác giả bộ sách "Chinh phục Toán THCS"'
             ]
         },
         {
             id: 2,
             name: 'Ngô Trọng Nguyên',
-            title: 'Senior Design Strategist',
+            title: 'Tác giả chính',
             bio: 'hiện đang là sinh viên ngành Kỹ thuật Máy tính tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội. Anh là thành viên năng nổ trong Câu lạc bộ Sáng tạo Sinh viên SINNO và đã tham gia hướng dẫn tại các Trại hè Công nghệ KIDEMY - một hoạt động cộng đồng đầy hấp dẫn của Trường Công nghệ Thông tin và Truyền thông nhằm mục đích mang đến cho các bạn trẻ những cập nhật công nghệ mới nhất. Đây cũng là nơi anh và thầy Lương lấy cảm hứng để viết cuốn sách này.',
             achievements: [
-                'Built design systems for Fortune 500 companies',
-                'Led UX research initiatives at major tech firms',
-                'Contributed to open-source design tools',
-                'Speaker at Design Conferences worldwide'
+                'Sinh viên Kỹ thuật Máy tính, Bách khoa Hà Nội',
+                'Thành viên Câu lạc bộ Sáng tạo Sinh viên SINNO',
+                'Hướng dẫn viên Trại hè Công nghệ KIDEMY',
+                'Chia sẻ kiến thức công nghệ với cộng đồng',
+                'Cộng tác viên dự án sách giáo dục'
             ]
         }
     ]
 };
+
 
 // ========== HELPER: Initialize Firebase Collections ==========
 async function initializeCollections() {
