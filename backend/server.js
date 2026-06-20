@@ -110,16 +110,16 @@ async function initializeCollections() {
         // Check if book info exists
         const bookSnapshot = await db.collection('book').doc('info').get();
         if (!bookSnapshot.exists) {
-            console.log('📚 Initializing book document...');
+            console.log('Initializing book document...');
             await db.collection('book').doc('info').set({
-                title: 'The Art of Digital Design',
-                category: 'Design Theory',
-                author: 'Sarah Chen',
-                pages: 384,
-                format: 'Hardcover',
-                releaseDate: '2025-03-01',
+                title: 'kỷ Nguyên của Những Nhà Sáng Tạo Vibe Code',
+                category: 'Technology & Startup',
+                author: 'ThS. Hồ Việt Độc Lương, Ngô Trọng Nguyên',
+                pages: 119,
+                format: 'Paperback',
+                releaseDate: '2026-07-01',
                 price: 45.00,
-                description: 'A masterful examination of the principles that define contemporary design practice...'
+                description: 'Cuốn sách dành cho các nhà phát triển, startup founders, và những người đam mê công nghệ muốn hiểu rõ hơn về quy trình từ ý tưởng đến sản phẩm thực tế.Thông qua cách tiếp cận thực tế, học cách từ Ý Tưởng → Thực Thi Code → Tạo Sản Phẩm có Tác Động'
             });
             console.log('✓ Book info initialized');
         }
