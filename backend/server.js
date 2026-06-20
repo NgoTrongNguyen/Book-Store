@@ -112,7 +112,7 @@ async function initializeCollections() {
         if (!bookSnapshot.exists) {
             console.log('Initializing book document...');
             await db.collection('book').doc('info').set({
-                title: 'kỷ Nguyên của Những Nhà Sáng Tạo Vibe Code',
+                title: 'Kỷ Nguyên của Những Nhà Sáng Tạo Vibe Code',
                 category: 'Technology & Startup',
                 author: 'ThS. Hồ Việt Độc Lương, Ngô Trọng Nguyên',
                 pages: 119,
