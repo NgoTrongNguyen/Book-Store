@@ -39,7 +39,6 @@ document.getElementById('preorderForm').addEventListener('submit', async (e) => 
         quantity: document.querySelector('select[name="quantity"]').value,
         address: document.querySelector('input[name="address"]').value,
         city: document.querySelector('input[name="city"]').value,
-        zip: document.querySelector('input[name="zip"]').value,
         country: document.querySelector('select[name="country"]').value,
         requests: document.querySelector('textarea[name="requests"]').value,
         updates: document.querySelector('input[name="updates"]').checked

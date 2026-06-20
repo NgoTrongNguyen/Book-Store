@@ -165,7 +165,7 @@ app.get('/api/health', (req, res) => {
  */
 app.post('/api/preorder', async (req, res) => {
     try {
-        const { name, email, phone, quantity, address, city, zip, country, requests, updates } = req.body;
+        const { name, email, phone, quantity, address, city, country, requests, updates } = req.body;
 
         // Validation
         if (!name || !email || !phone) {
@@ -192,7 +192,6 @@ app.post('/api/preorder', async (req, res) => {
             quantity: quantity || '1',
             address,
             city,
-            zip,
             country,
             requests: requests || '',
             updates: updates || false,
