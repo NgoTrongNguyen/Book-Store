@@ -78,6 +78,7 @@ const authorData = {
             name: 'ThS. Hồ Viết Đức Lương',
             title: 'Tác giả chính',
             bio: 'hiện giảng dạy tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội và nghiên cứu tại Trung tâm Nghiên cứu quốc tế về Trí tuệ nhân tạo BKAI. Thầy có nhiều công bố khoa học trên các tạp chí và hội nghị hàng đầu trên thế giới trong nhiều lĩnh vực Trí tuệ nhân tạo, Tối ưu hóa và Tin học sức khỏe. Thầy là tác giả của nhiều đầu sách cho học sinh THCS, điển hình là bộ "Định hướng, Trau dồi, Chinh phục Toán THCS"',
+            imageUrl: 'https://ibb.co/wZPGmqhT',
             achievements: [
                 'Giảng dạy tại Bách khoa Hà Nội',
                 'Nghiên cứu tại BKAI',
@@ -91,6 +92,7 @@ const authorData = {
             name: 'Ngô Trọng Nguyên',
             title: 'Tác giả chính',
             bio: 'hiện đang là sinh viên ngành Kỹ thuật Máy tính tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội. Anh là thành viên năng nổ trong Câu lạc bộ Sáng tạo Sinh viên SINNO và đã tham gia hướng dẫn tại các Trại hè Công nghệ KIDEMY - một hoạt động cộng đồng đầy hấp dẫn của Trường Công nghệ Thông tin và Truyền thông nhằm mục đích mang đến cho các bạn trẻ những cập nhật công nghệ mới nhất. Đây cũng là nơi anh và thầy Lương lấy cảm hứng để viết cuốn sách này.',
+            imageUrl: 'https://ibb.co/6RV5sGK5',
             achievements: [
                 'Sinh viên Kỹ thuật Máy tính, Bách khoa Hà Nội',
                 'Thành viên Câu lạc bộ Sáng tạo Sinh viên SINNO',
