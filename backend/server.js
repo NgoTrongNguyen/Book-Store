@@ -31,43 +31,43 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const initialReviews = [
     {
         id: 1,
-        author: 'Alex Thompson',
-        title: 'A Game-Changer for Designers',
-        text: 'This book completely transformed how I approach design problems. Chen\'s methodology is crystal clear and immediately applicable. The case studies are exceptional.',
+        author: 'Nguyễn Minh Tuấn',
+        title: 'May mắn khi được đọc bản thảo thử nghiệm sớm!',
+        text: 'Là một trong những người đầu tiên được tiếp cận bản thảo thử nghiệm, tôi thực sự bị sốc bởi tư duy Vibe Coding mà sách chia sẻ. Dù bản thảo lúc đó còn vài lỗi chính tả nhỏ, nhưng phương pháp luận điều khiển AI để sáng tạo sản phẩm thì quá xuất sắc và thực tế.',
         rating: 5,
-        date: '2025-01-15'
+        date: '2026-06-15'
     },
     {
         id: 2,
-        author: 'Maria Garcia',
-        title: 'Comprehensive and Insightful',
-        text: 'Finally, a design book that bridges theory and practice. The chapters on accessibility and design systems are particularly valuable. Highly recommended for all skill levels.',
+        author: 'Trần Thị Mai Chi',
+        title: 'Bản beta quá chất lượng, mong chờ sách in chính thức',
+        text: 'Tôi nhận được bản thảo dùng thử từ tác giả và đã thức cả đêm để đọc hết. Sách không chỉ dạy Vibe Coding đơn thuần mà còn định hình lại toàn bộ quy trình làm việc giữa người và AI. Mong là bản in chính thức sẽ giữ trọn vẹn được sự nhiệt huyết này.',
         rating: 5,
-        date: '2025-01-10'
+        date: '2026-06-10'
     },
     {
         id: 3,
-        author: 'David Kim',
-        title: 'Essential Reading',
-        text: 'Whether you\'re a junior designer or a seasoned professional, this book offers something valuable. Chen\'s writing is clear and engaging, making complex concepts accessible.',
+        author: 'Hoàng Đăng Khoa',
+        title: 'Đóng góp ý kiến cho bản thảo và học được vô số điều',
+        text: 'Tham gia đội ngũ đọc thử và phản hồi (feedback) cho cuốn sách này là một trải nghiệm vô giá. Từ một người hoài nghi về Vibe Coding, những chương bản thảo đầu tiên đã thuyết phục tôi hoàn toàn về kỷ nguyên mới của các nhà sáng tạo.',
         rating: 4,
-        date: '2025-01-05'
+        date: '2026-06-02'
     },
     {
         id: 4,
-        author: 'Sophie Laurent',
-        title: 'Brilliant Insights on Modern Design',
-        text: 'The intersection of aesthetics and functionality is explored beautifully. This is the design book I\'ve been waiting for.',
+        author: 'Lê Thu Thảo',
+        title: 'Góc nhìn tiên phong ngay từ những trang viết đầu tiên',
+        text: 'Cầm trên tay bản thảo sơ thảo mà tôi cứ ngỡ là một cuốn sách đã hoàn thiện vì kiến thức quá đặc quánh. Cách tác giả hướng dẫn người đọc "bắt vần" (vibe) với AI để code mở ra một chương hoàn toàn mới cho giới công nghệ hiện tại.',
         rating: 5,
-        date: '2024-12-28'
+        date: '2026-05-28'
     },
     {
         id: 5,
-        author: 'Marcus Johnson',
-        title: 'Perfect for Design Teams',
-        text: 'Our entire team read this and it sparked amazing conversations. We\'ve already implemented several methodologies from the book.',
+        author: 'Phạm Đức Anh',
+        title: 'Cả team mình đã cùng mổ xẻ bản thảo thử nghiệm này',
+        text: 'Tác giả đã gửi cho team mình bản thảo bản đọc sớm để kiểm chứng thực tế. Kết quả là tụi mình đã áp dụng ngay các tips Vibe Coding vào dự án hiện tại của công ty và thấy hiệu suất tăng rõ rệt. Sách cực kỳ đáng đồng tiền bát gạo khi ra mắt!',
         rating: 5,
-        date: '2024-12-20'
+        date: '2026-05-19'
     }
 ];
 
