@@ -113,24 +113,31 @@ async function loadReviews() {
     }
 }
 
-// ========== LOAD AUTHOR ==========
-async function loadAuthor() {
-    const container = document.getElementById('author-container');
+// ========== LOAD AUTHOR ==========async function loadAuthor() {
+const container = document.getElementById('author-container');
 
-    try {
-        const response = await fetch(`${API_URL}/author`);
+try {
+    const response = await fetch(`${API_URL}/authors`);  // ← /authors (plural)
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch author info');
-        }
+    if (!response.ok) {
+        throw new Error('Failed to fetch authors');
+    }
 
-        const data = await response.json();
-        const authors = data.authors || [data]; // Hỗ trợ cả cách cũ
+    const authors = await response.json();
+    console.log('Authors loaded:', authors);  // ← Debug xem có dữ liệu không
 
-        // Hiển thị nhiều tác giả
-        container.innerHTML = authors.map(author => `
+    container.innerHTML = authors.map(author => `
             <div class="author-bio">
-                <div class="author-image">${author.name.charAt(0)}</div>
+                ${author.imageUrl ? `
+                    <img src="${author.imageUrl}" 
+                         alt="${escapeHtml(author.name)}" 
+                         class="author-image-photo"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                ` : `
+                    <div class="author-image">${author.name.split(' ').map(n => n[0]).join('')}</div>
+                `}
+                
                 <div class="author-info">
                     <h2>${escapeHtml(author.name)}</h2>
                     <div class="author-title">${escapeHtml(author.title)}</div>
@@ -146,11 +153,11 @@ async function loadAuthor() {
             </div>
         `).join('<hr class="author-divider">');
 
-    } catch (error) {
-        console.error('Error loading author:', error);
-        container.innerHTML = '<div style="text-align: center; padding: 3rem; color: #999;">Failed to load author information</div>';
-    }
+} catch (error) {
+    console.error('Error loading authors:', error);
+    container.innerHTML = '<div style="text-align: center; padding: 3rem; color: #999;">Không thể tải thông tin tác giả</div>';
 }
+
 
 // ========== UTILITY FUNCTIONS ==========
 
