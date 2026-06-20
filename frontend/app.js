@@ -113,20 +113,23 @@ async function loadReviews() {
     }
 }
 
-// ========== LOAD AUTHOR ==========async function loadAuthor() {
-const container = document.getElementById('author-container');
+// ========== LOAD AUTHOR ==========
+async function loadAuthor() {
+    const container = document.getElementById('author-container');
 
-try {
-    const response = await fetch(`${API_URL}/authors`);  // ← /authors (plural)
+    try {
+        const response = await fetch(`${API_URL}/author`);  // ✅ Thay /authors → /author
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch authors');
-    }
+        if (!response.ok) {
+            throw new Error('Failed to fetch authors');
+        }
 
-    const authors = await response.json();
-    console.log('Authors loaded:', authors);  // ← Debug xem có dữ liệu không
+        const data = await response.json();
+        const authors = data.authors;  // ✅ Lấy property 'authors' từ response
 
-    container.innerHTML = authors.map(author => `
+        console.log('Authors loaded:', authors);
+
+        container.innerHTML = authors.map(author => `
             <div class="author-bio">
                 ${author.imageUrl ? `
                     <img src="${author.imageUrl}" 
@@ -153,11 +156,11 @@ try {
             </div>
         `).join('<hr class="author-divider">');
 
-} catch (error) {
-    console.error('Error loading authors:', error);
-    container.innerHTML = '<div style="text-align: center; padding: 3rem; color: #999;">Không thể tải thông tin tác giả</div>';
+    } catch (error) {
+        console.error('Error loading authors:', error);
+        container.innerHTML = '<div style="text-align: center; padding: 3rem; color: #999;">Không thể tải thông tin tác giả</div>';
+    }
 }
-
 
 // ========== UTILITY FUNCTIONS ==========
 
