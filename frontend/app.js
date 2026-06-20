@@ -124,11 +124,13 @@ async function loadAuthor() {
             throw new Error('Failed to fetch author info');
         }
 
-        const author = await response.json();
+        const data = await response.json();
+        const authors = data.authors || [data]; // Hỗ trợ cả cách cũ
 
-        container.innerHTML = `
+        // Hiển thị nhiều tác giả
+        container.innerHTML = authors.map(author => `
             <div class="author-bio">
-                <div class="author-image">SC</div>
+                <div class="author-image">${author.name.charAt(0)}</div>
                 <div class="author-info">
                     <h2>${escapeHtml(author.name)}</h2>
                     <div class="author-title">${escapeHtml(author.title)}</div>
@@ -142,7 +144,7 @@ async function loadAuthor() {
                     </div>
                 </div>
             </div>
-        `;
+        `).join('<hr class="author-divider">');
 
     } catch (error) {
         console.error('Error loading author:', error);

@@ -72,17 +72,31 @@ const initialReviews = [
 ];
 
 const authorData = {
-    name: 'Sarah Chen',
-    title: 'Design Director & Design System Architect',
-    bio: 'Sarah Chen is an internationally recognized design leader with over 15 years of experience creating digital products for Fortune 500 companies and innovative startups. Her work has shaped design practices at major tech companies and influenced the next generation of designers worldwide.',
-    achievements: [
-        'Led design teams at three major tech companies',
-        'Speaker at 20+ international design conferences',
-        'Published numerous articles on design theory and practice',
-        'Mentored 100+ designers throughout her career',
-        'Built design systems serving millions of users',
-        'Design Excellence Award (2022)',
-        'Featured in Design Magazine\'s 50 Most Influential Designers'
+    authors: [
+        {
+            id: 1,
+            name: 'ThS. Hồ Viết Đức Lương',
+            title: 'Design Director & Design System Architect',
+            bio: 'hiện giảng dạy tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội và nghiên cứu tại Trung tâm Nghiên cứu quốc tế về Trí tuệ nhân tạo BKAI.Thầy có nhiều công bố khoa học trên các tạp chí và hội nghị hàng đầu trên thế giới trong nhiều lĩnh vực Trí tuệ nhân tạo, Tối ưu hóa và Tin học sức khỏe.Thầy là tác giả của nhiều đầu sách cho học sinh THCS, điển hình là bộ “Định hướng, Trau dồi, Chinh phục Toán THCS”',
+            achievements: [
+                'Led design teams at three major tech companies',
+                'Speaker at 20+ international design conferences',
+                'Published numerous articles on design theory',
+                'Mentored 100+ designers throughout her career'
+            ]
+        },
+        {
+            id: 2,
+            name: 'Ngô Trọng Nguyên',
+            title: 'Senior Design Strategist',
+            bio: 'hiện đang là sinh viên ngành Kỹ thuật Máy tính tại Trường Công nghệ Thông tin và Truyền thông, Đại học Bách khoa Hà Nội. Anh là thành viên năng nổ trong Câu lạc bộ Sáng tạo Sinh viên SINNO và đã tham gia hướng dẫn tại các Trại hè Công nghệ KIDEMY - một hoạt động cộng đồng đầy hấp dẫn của Trường Công nghệ Thông tin và Truyền thông nhằm mục đích mang đến cho các bạn trẻ những cập nhật công nghệ mới nhất. Đây cũng là nơi anh và thầy Lương lấy cảm hứng để viết cuốn sách này.',
+            achievements: [
+                'Built design systems for Fortune 500 companies',
+                'Led UX research initiatives at major tech firms',
+                'Contributed to open-source design tools',
+                'Speaker at Design Conferences worldwide'
+            ]
+        }
     ]
 };
 
