@@ -623,27 +623,6 @@ body {
     font-weight: bold;
 }
 
-.author-skeleton {
-    padding: 3rem;
-    text-align: center;
-    color: #999;
-    animation: pulse 1.5s infinite;
-}
-
-.author-divider {
-    margin: 3rem 0;
-    border: none;
-    border-top: 1px solid #e0e0e0;
-}
-
-.author-bio {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-    align-items: start;
-    margin-bottom: 2rem;
-}
-
 /* ========== AUTHOR IMAGE ========== */
 .author-image-photo {
     width: 200px;
@@ -690,17 +669,6 @@ body {
         width: 100%;
         height: auto;
         max-height: 300px;
-    }
-
-    .author-image {
-        width: 100%;
-        height: 250px;
-    }
-}
-
-@media (max-width: 768px) {
-    .author-bio {
-        grid-template-columns: 1fr;
     }
 
     .author-image {
